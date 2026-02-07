@@ -14,13 +14,12 @@ import { cn } from '@/lib/utils';
 
 interface Grade1MathModuleProps {
     onBack: () => void;
-    initialView?: ViewType;
 }
 
 type ViewType = 'menu' | 'addition10' | 'snake';
 
-export function Grade1MathModule({ onBack, initialView = 'menu' }: Grade1MathModuleProps) {
-    const [view, setView] = useState<ViewType>(initialView);
+export function Grade1MathModule({ onBack }: Grade1MathModuleProps) {
+    const [view, setView] = useState<ViewType>('menu');
 
     const handleBackToMenu = () => setView('menu');
 

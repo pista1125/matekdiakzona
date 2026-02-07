@@ -18,13 +18,12 @@ import { cn } from '@/lib/utils';
 
 interface Grade2MathModuleProps {
     onBack: () => void;
-    initialView?: ViewType;
 }
 
 type ViewType = 'menu' | 'coloring' | 'quiz' | 'blocks' | 'snake';
 
-export function Grade2MathModule({ onBack, initialView = 'menu' }: Grade2MathModuleProps) {
-    const [view, setView] = useState<ViewType>(initialView);
+export function Grade2MathModule({ onBack }: Grade2MathModuleProps) {
+    const [view, setView] = useState<ViewType>('menu');
 
     const handleBackToMenu = () => setView('menu');
 
