@@ -21,19 +21,22 @@ export function TowerBuilderGame({ onBack }: TowerBuilderGameProps) {
     }, []);
 
     const generateNewRound = () => {
-        // Generate two problems
-        // Problem 1: Subtraction in large range (e.g., 500 - 280)
-        // Problem 2: Addition (e.g., 20 + 340)
+        // Generate two problems from mixed operations
+        const ops: ('addition' | 'subtraction' | 'multiplication' | 'division')[] = 
+            ['addition', 'subtraction', 'multiplication', 'division'];
+        
+        const type1 = ops[Math.floor(Math.random() * ops.length)];
+        const type2 = ops[Math.floor(Math.random() * ops.length)];
 
-        const tower1 = generateTowerProblem(1, 'subtraction');
-        const tower2 = generateTowerProblem(2, 'addition');
+        const tower1 = generateTowerProblem(1, type1);
+        const tower2 = generateTowerProblem(2, type2);
 
         setTowers([tower1, tower2]);
         setActiveTowerId(tower1.id);
         setFeedback(null);
     };
 
-    const generateTowerProblem = (id: number, type: 'addition' | 'subtraction') => {
+    const generateTowerProblem = (id: number, type: 'addition' | 'subtraction' | 'multiplication' | 'division') => {
         let num1, num2, result, problem;
 
         if (type === 'subtraction') {
@@ -53,6 +56,23 @@ export function TowerBuilderGame({ onBack }: TowerBuilderGameProps) {
 
             result = finalA - finalB;
             problem = `${finalA} - ${finalB}`;
+        } else if (type === 'multiplication') {
+            // Multiplication: A * B = Result.
+            // Result up to 100 (basic multiplication table)
+            const a = Math.floor(Math.random() * 9) + 2; // 2-10
+            const b = Math.floor(Math.random() * 9) + 2; // 2-10
+            
+            result = a * b;
+            problem = `${a} × ${b}`;
+        } else if (type === 'division') {
+            // Division: A / B = Result.
+            // Result up to 10, divisor up to 10
+            const res = Math.floor(Math.random() * 9) + 2; // 2-10
+            const b = Math.floor(Math.random() * 9) + 2; // 2-10
+            const a = res * b;
+            
+            result = res;
+            problem = `${a} : ${b}`;
         } else {
             // Addition: A + B = Result.
             // Result up to 1000.
